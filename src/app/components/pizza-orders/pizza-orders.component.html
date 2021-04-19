@@ -1,0 +1,79 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="customerName">
+    <th mat-header-cell *matHeaderCellDef> Customer Name</th>
+    <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="noOfItems">
+    <th mat-header-cell *matHeaderCellDef> No. of Items ordered</th>
+    <td mat-cell *matCellDef="let element"> {{element.noOfItems}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="totalAmount">
+    <th mat-header-cell *matHeaderCellDef> Total Amount of the Order</th>
+    <td mat-cell *matCellDef="let element"> {{element.totalAmount}} INR </td>
+  </ng-container>
+
+  <ng-container matColumnDef="orderStatus">
+    <th mat-header-cell *matHeaderCellDef> Status of the Order</th>
+    <td mat-cell *matCellDef="let element"> {{element.orderStatus}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="changeStatus">
+    <th mat-header-cell *matHeaderCellDef> Change the Status</th>
+    <td mat-cell *matCellDef="let element">
+      <select name="orders" id="orderstatus"
+      #mySelect
+      (change)='onOptionsSelected(mySelect.value)'>
+      <option value="">Change status</option>
+        <option value="Order Received">Order Received</option>
+        <option value="Preparing">Preparing</option>
+        <option value="Ready to serve">Ready to serve</option>
+      </select>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="details">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" style="background: cadetblue;">Get Details</button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getOrderData(row)"></tr>
+</table>
+
+<div class="order-details-container" *ngIf="isShowData">
+  
+<div class="order-data">
+  <div class="heading-data">
+    <h3>Order Details</h3>
+  </div>
+</div>
+
+
+
+<div class="card-style">
+<mat-card>
+  <label>Customer Name</label> 
+  <p>{{orderDetails.customerName}}</p> 
+</mat-card>
+<mat-card>
+  <label>	No. of Items ordered</label> 
+  <p>{{orderDetails.noOfItems}}</p> 
+</mat-card>
+<mat-card>
+  <label>Total Amount of the Order</label> 
+  <p>{{orderDetails.totalAmount}}</p> 
+</mat-card>
+<mat-card>
+  <label>Status of the Order</label> 
+  <p>{{orderDetails.orderStatus}}</p> 
+</mat-card>
+<mat-card>
+  <label>Items Ordered</label> 
+  <p>Biryani</p> 
+</mat-card>
+</div>
+</div>
